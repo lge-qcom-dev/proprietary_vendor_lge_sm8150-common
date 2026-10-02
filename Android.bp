@@ -2435,6 +2435,7 @@ cc_prebuilt_library_shared {
                 "lib-imsxml",
                 "lib-imsqimf",
                 "liblog",
+                "libz",
                 "libc++",
                 "libc",
                 "libm",
@@ -16986,6 +16987,32 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
+    name: "libqmiextservices",
+    owner: "lge",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libqmiextservices.so",
+            ],
+            shared_libs: [
+                "libidl",
+                "libqmiservices",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "libqti-iopd-client",
     owner: "lge",
     strip: {
@@ -17138,6 +17165,7 @@ cc_prebuilt_library_shared {
                 "vendor.qti.hardware.radio.internal.deviceinfo@1.0",
                 "vendor.lge.hardware.lgdata@1.0",
                 "vendor.lge.hardware.radio@2.0",
+                "libqmiextservices",
                 "libdsutils",
                 "libcutils",
                 "liblog",
@@ -20570,7 +20598,6 @@ cc_prebuilt_binary {
         },
     },
     compile_multilib: "64",
-    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -21062,6 +21089,34 @@ cc_prebuilt_binary {
 }
 
 cc_prebuilt_binary {
+    name: "qmipriod",
+    owner: "lge",
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/bin/qmipriod",
+            ],
+            shared_libs: [
+                "libqmi_cci",
+                "libqmiservices",
+                "libqmi_client_helper",
+                "libcutils",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    strip: {
+        none: true,
+    },
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_binary {
     name: "qni",
     owner: "lge",
     target: {
@@ -21287,6 +21342,41 @@ cc_prebuilt_binary {
 }
 
 cc_prebuilt_binary {
+    name: "shsusrd",
+    owner: "lge",
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/bin/shsusrd",
+            ],
+            shared_libs: [
+                "libcrypto",
+                "libssl",
+                "libqmiservices",
+                "libqmi_cci",
+                "libqmi_common_so",
+                "libqmi_client_qmux",
+                "libqmi_client_helper",
+                "libdsutils",
+                "libconfigdb",
+                "libcutils",
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    strip: {
+        none: true,
+    },
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_binary {
     name: "sscrpcd",
     owner: "lge",
     target: {
@@ -21357,6 +21447,7 @@ cc_prebuilt_binary {
                 "libqmi_csi",
                 "libqmi_cci",
                 "libdsi_netctrl",
+                "libcrypto",
                 "libc++",
                 "libc",
                 "libm",
